@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-authorization',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthorizationComponent implements OnInit {
 
+  formAuth = new FormGroup({
+    email: new FormControl('', Validators.email),
+    password: new FormControl('', Validators.required)
+  });
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onSubmit(form) {
+    console.log(form.status)
   }
 
 }

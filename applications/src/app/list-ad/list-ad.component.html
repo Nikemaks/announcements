@@ -1,1 +1,11 @@
-<p>list-ad works!</p>
+<div class="card" *ngFor="let ad of aplication">
+    <div class="col card-body">
+      <h1 class="card-title">{{ad.title}}</h1>
+      <p>{{ad.description}}</p>
+      <hr>
+      <div class="card-info">
+        <small>Author: {{ad.author}}</small>
+        <small>{{ad.date | date:'medium'}}</small>
+      </div>
+    </div>
+</div>

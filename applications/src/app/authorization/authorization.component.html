@@ -1,12 +1,25 @@
-<form class="form-login">
-  <div class="form-group">
+<form class="form-login" [formGroup]="formAuth"(ngSubmit)="onSubmit(formAuth)">
+  <div class="form-group ">
     <label for="loginField">Login </label>
-    <input type="email" class="form-control" id="loginField" aria-describedby="loginField" placeholder="Enter login">
-    <small class="form-text text-muted has-error">We'll never share your email with anyone else.</small>
+    <input
+      formControlName="email"
+      type="email"
+      class="form-control"
+      [ngClass]="{'is-invalid': formAuth.invalid && formAuth.touched}"
+      id="loginField"
+      placeholder="Enter login">
+    <small class="invalid-feedback">Error</small>
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    <input
+      formControlName="password"
+      type="password"
+      class="form-control"
+      [ngClass]="{'is-invalid': formAuth.invalid && formAuth.touched}"
+      id="exampleInputPassword1"
+      placeholder="Password">
+    <small class="invalid-feedback">Error</small>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
