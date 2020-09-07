@@ -2,13 +2,19 @@
   <div class="form-group ">
     <label for="loginField">Login </label>
     <input
-      formControlName="email"
-      type="email"
+      formControlName="login"
+      type="text"
       class="form-control"
-      [ngClass]="{'is-invalid': formAuth.invalid && formAuth.touched}"
+      [ngClass]="{'is-invalid': formAuth.get('login').touched && formAuth.get('login').invalid}"
       id="loginField"
       placeholder="Enter login">
-    <small class="invalid-feedback">Error</small>
+      <small class="invalid-feedback"
+             *ngIf="formAuth.get('login').errors && formAuth.get('login').errors.required"
+      >Required</small>
+      <small class="invalid-feedback"
+             *ngIf="formAuth.get('login').errors && formAuth.get('login').errors.minlength">
+        Минимальная длина 6 символов
+      </small>
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
@@ -16,12 +22,21 @@
       formControlName="password"
       type="password"
       class="form-control"
-      [ngClass]="{'is-invalid': formAuth.invalid && formAuth.touched}"
+      [ngClass]="{'is-invalid':formAuth.get('password').touched && formAuth.get('password').invalid}"
       id="exampleInputPassword1"
       placeholder="Password">
-    <small class="invalid-feedback">Error</small>
+      <small class="invalid-feedback"
+             *ngIf="formAuth.get('password').errors && formAuth.get('password').errors.required">
+        Required</small>
+      <small class="invalid-feedback"
+             *ngIf="formAuth.get('password').errors && formAuth.get('password').errors.minlength">
+        Минимальная длина 6 символов</small>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="formAuth.invalid"
+    >Submit</button>
 </form>
 
 

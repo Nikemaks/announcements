@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../services/auth.service";
+import User from "../interfaces/User";
 
 @Component({
   selector: 'app-authorization',
@@ -9,16 +11,33 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 export class AuthorizationComponent implements OnInit {
 
   formAuth = new FormGroup({
-    email: new FormControl('', Validators.email),
-    password: new FormControl('', Validators.required)
+    login: new FormControl(null, [
+       Validators.minLength(6),
+       Validators.required]),
+    password: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(6)
+    ])
   });
-  constructor() { }
+
+  submitted = false;
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
   }
 
   onSubmit(form) {
-    console.log(form.status)
+    if (this.formAuth.invalid) {
+      return
+    }
+    this.submitted = true;
+    const user: User = {
+      login: this.formAuth.value.login,
+      password: this.formAuth.value.password
+    };
+    this.authService.login(user).subscribe((res)=> {
+      this.formAuth.reset();
+    })
   }
 
 }
