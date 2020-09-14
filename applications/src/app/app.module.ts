@@ -4,10 +4,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthorizationComponent } from './authorization/authorization.component';
-import { CreateNewAdComponent } from './create-new-ad/create-new-ad.component';
-import { ListAdComponent } from './list-ad/list-ad.component';
-import { MainPageComponent } from './main-page/main-page.component';
+import { AuthorizationComponent } from './components/authorization/authorization.component';
+import { CreateNewAdComponent } from './pages/create-new-ad/create-new-ad.component';
+import { ListAdComponent } from './components/list-ad/list-ad.component';
+import { MainPageComponent } from './pages/main-page/main-page.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { MainPageComponent } from './main-page/main-page.component';
     AuthorizationComponent,
     CreateNewAdComponent,
     ListAdComponent,
-    MainPageComponent
+    MainPageComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import Application from "../interfaces/interface_ad";
-import applicationMock from "../mock.api";
+import Application from "../../interfaces/interface_ad";
+import applicationMock from "../../mock.api";
 
 @Component({
   selector: 'app-list-ad',

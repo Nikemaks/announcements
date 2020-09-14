@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../services/auth.service";
-import User from "../interfaces/User";
+import {AuthService} from "../../services/auth.service";
+import User from "../../interfaces/User";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-authorization',
@@ -21,7 +22,8 @@ export class AuthorizationComponent implements OnInit {
   });
 
   submitted = false;
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+              private route: Router) { }
 
   ngOnInit(): void {
   }
@@ -37,6 +39,7 @@ export class AuthorizationComponent implements OnInit {
     };
     this.authService.login(user).subscribe((res)=> {
       this.formAuth.reset();
+      this.route.navigate(['edit', {login: res.login}]);
     })
   }
 

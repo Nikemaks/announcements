@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {CreateNewAdComponent} from './create-new-ad/create-new-ad.component';
-import {MainPageComponent} from './main-page/main-page.component';
+import {CreateNewAdComponent} from './pages/create-new-ad/create-new-ad.component';
+import {MainPageComponent} from './pages/main-page/main-page.component';
 
 const routes: Routes = [
   {path: '', component: MainPageComponent},

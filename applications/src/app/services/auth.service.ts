@@ -7,11 +7,12 @@ import {of} from "rxjs/internal/observable/of";
   providedIn: 'root'
 })
 export class AuthService {
-
+  currentUser: User;
   constructor() { }
 
   login(user: User): Observable<any> {
-    const currentUser = this.findUser(user) || this.setUser(user);
+    const currentUser = this.createNewUser(user);
+    this.currentUser = currentUser;
     return of(currentUser);
   }
 
@@ -20,8 +21,21 @@ export class AuthService {
     return usersFromStorage.find(userStore => userStore.login === user.login);
   }
 
-  setUser(user: User): void {
-    localStorage.setItem(user.login, JSON.stringify(user));
+  createNewUser(user: User): User {
+    if (this.findUser(user)) {
+      return this.findUser(user)
+    }
+
+    const users = localStorage.getItem('users');
+    let array = users ? JSON.parse(users) : [];
+    array.push(user);
+
+    localStorage.setItem('users', JSON.stringify(array));
+    return user;
+  }
+
+  get isAuth(): User {
+    return this.currentUser;
   }
 
   logOut(){}
